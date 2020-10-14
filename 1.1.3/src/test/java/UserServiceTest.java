@@ -87,16 +87,11 @@ public class UserServiceTest {
     public void cleanUsersTable() {
         try {
             userService.dropUsersTable();
-            System.out.println("дропнулась");
             userService.createUsersTable();
-            System.out.println("создалась");
             userService.saveUser(testName, testLastName, testAge);
-            System.out.println("добавились");
             userService.cleanUsersTable();
-            System.out.println("очистились");
 
             if (userService.getAllUsers().size() != 0) {
-                System.out.println(userService.getAllUsers().size());
                 Assert.fail("Метод очищения таблицы пользователей реализован не корректно");
             }
         } catch (Exception e) {
