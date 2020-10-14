@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Util {
+public class Util implements AutoCloseable{
 
     private Connection connection;
 
@@ -21,6 +21,15 @@ public class Util {
     }
 
     public void disconnect() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void close() throws Exception {
         try {
             connection.close();
         } catch (SQLException e) {
