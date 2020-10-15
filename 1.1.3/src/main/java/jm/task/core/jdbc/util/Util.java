@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Util implements AutoCloseable{
 
-    private Connection connection;
+    private static Connection connection = null;
 
     public Util() {
         try {
@@ -16,7 +16,14 @@ public class Util implements AutoCloseable{
         }
     }
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
+        if (connection == null){
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/users?useUnicode=true&serverTimezone=UTC&useSSL=false", "admin", "12345");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         return connection;
     }
 

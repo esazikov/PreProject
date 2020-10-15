@@ -9,11 +9,9 @@ import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
 
-    private Util util = new Util();
     private Connection connection;
-    private Savepoint sp1;
 
-    public UserDaoJDBCImpl() {connection = util.getConnection();}
+    public UserDaoJDBCImpl() {connection = Util.getConnection();}
 
     public void createUsersTable() {
         try {
@@ -44,12 +42,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void saveUser(String name, String lastName, byte age) {
         try {
-            sp1 = connection.setSavepoint();
-            PreparedStatement preparedStatement = util.getConnection().prepareStatement("INSERT INTO users (name, lastname,age) VALUES (?, ?, ?)");
-            /*Statement statement = util.getConnection().createStatement();
-            String sql = "INSERT INTO users (name, lastname, age) VALUES ('" + name + "', '" + lastName + "', " + age +");";
-            statement.executeUpdate(sql);
-            statement.close();*/
+            connection.setAutoCommit(false);
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users (name, lastname,age) VALUES (?, ?, ?)");
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
             preparedStatement.setByte(3, age);
@@ -57,12 +51,7 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.setAutoCommit(true);
             System.out.println("User с именем - " + name + " добавлен в базу данных");
             preparedStatement.close();
-        } catch (SQLException e) {
-            try {
-                connection.rollback(sp1);
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
