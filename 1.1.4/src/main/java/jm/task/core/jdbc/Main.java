@@ -8,15 +8,18 @@ public class Main {
     public static void main(String[] args) {
         //UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
         UserServiceImpl userService = new UserServiceImpl();
+        userService.dropUsersTable();
+        System.out.println("дропнулась");
         userService.createUsersTable();
+        System.out.println("создалась");
         userService.saveUser("John", "Smith", (byte) 64);
         userService.saveUser("Jonney", "Smither", (byte) 53);
         userService.saveUser("Djohnatan", "Smithest", (byte) 42);
         userService.saveUser("Johan", "Smithy", (byte) 31);
-        System.out.println(userService.getAllUsers());
-        userService.cleanUsersTable();
-        System.out.println(userService.getAllUsers());
-        userService.dropUsersTable();
+      //  System.out.println(userService.getAllUsers());
+//        userService.cleanUsersTable();
+//        System.out.println(userService.getAllUsers());
+//        userService.dropUsersTable();
 
     }
 }

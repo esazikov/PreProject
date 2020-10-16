@@ -1,5 +1,12 @@
 package jm.task.core.jdbc.util;
 
+import jm.task.core.jdbc.model.User;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -42,5 +49,20 @@ public class Util implements AutoCloseable{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static SessionFactory getSessionFactory() {
+        Configuration config = new Configuration()
+                .setProperty("hibernate.driver", "com.mysql.jdbc.Driver")
+                .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
+                .setProperty("hibernate.connection.username", "admin")
+                .setProperty("hibernate.connection.password", "12345")
+                .setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/users?useUnicode=true&serverTimezone=UTC&useSSL=false")
+                .setProperty("hibernate.show_sql", "true")
+                .setProperty("hibenate.current_session_context_class", "thread")
+                .addAnnotatedClass(User.class);
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                .applySettings(config.getProperties()).build();
+        return config.buildSessionFactory(serviceRegistry);
     }
 }
