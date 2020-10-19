@@ -7,9 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="PreProject" />
-        <module name="TaskJDBC" />
         <module name="TaskHibernate" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="TaskJDBC" target="7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
