@@ -14,6 +14,7 @@ import java.sql.SQLException;
 public class Util implements AutoCloseable{
 
     private static Connection connection = null;
+    public static SessionFactory sessionFactory = null;
 
     public Util() {
         try {
@@ -34,14 +35,6 @@ public class Util implements AutoCloseable{
         return connection;
     }
 
-    public void disconnect() {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void close() throws Exception {
         try {
@@ -52,17 +45,26 @@ public class Util implements AutoCloseable{
     }
 
     public static SessionFactory getSessionFactory() {
-        Configuration config = new Configuration()
-                .setProperty("hibernate.driver", "com.mysql.jdbc.Driver")
-                .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
-                .setProperty("hibernate.connection.username", "admin")
-                .setProperty("hibernate.connection.password", "12345")
-                .setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/users?useUnicode=true&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false")
-                .setProperty("hibernate.show_sql", "true")
-                .setProperty("hibenate.current_session_context_class", "thread")
-                .addAnnotatedClass(User.class);
-        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                .applySettings(config.getProperties()).build();
-        return config.buildSessionFactory(serviceRegistry);
+        if (sessionFactory == null) {
+            Configuration config = new Configuration()
+                    .setProperty("hibernate.driver", "com.mysql.jdbc.Driver")
+                    .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
+                    .setProperty("hibernate.connection.username", "admin")
+                    .setProperty("hibernate.connection.password", "12345")
+                    .setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/users?useUnicode=true&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false")
+                    .setProperty("hibernate.show_sql", "true")
+                    .setProperty("hibenate.current_session_context_class", "thread")
+                    .addAnnotatedClass(User.class);
+            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                    .applySettings(config.getProperties()).build();
+            sessionFactory = config.buildSessionFactory(serviceRegistry);
+        }
+        return sessionFactory;
+    }
+
+    public static void disconnect() {
+
+        sessionFactory.close();
+
     }
 }
