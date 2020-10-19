@@ -10,7 +10,7 @@ public class Util implements AutoCloseable{
 
     public Util() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/users?useUnicode=true&serverTimezone=UTC&useSSL=false", "admin", "12345");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/users?useUnicode=true&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false", "admin", "12345");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -19,7 +19,7 @@ public class Util implements AutoCloseable{
     public static Connection getConnection() {
         if (connection == null){
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/users?useUnicode=true&serverTimezone=UTC&useSSL=false", "admin", "12345");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/users?useUnicode=true&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false", "admin", "12345");
             } catch (SQLException e) {
                 e.printStackTrace();
             }

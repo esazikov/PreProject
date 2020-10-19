@@ -57,7 +57,7 @@ public class Util implements AutoCloseable{
                 .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
                 .setProperty("hibernate.connection.username", "admin")
                 .setProperty("hibernate.connection.password", "12345")
-                .setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/users?useUnicode=true&serverTimezone=UTC&useSSL=false")
+                .setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/users?useUnicode=true&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false")
                 .setProperty("hibernate.show_sql", "true")
                 .setProperty("hibenate.current_session_context_class", "thread")
                 .addAnnotatedClass(User.class);

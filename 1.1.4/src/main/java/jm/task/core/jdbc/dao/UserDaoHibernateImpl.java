@@ -5,6 +5,7 @@ import jm.task.core.jdbc.util.Util;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
@@ -62,7 +63,12 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        session = sessionFactory.openSession();
+        //session.beginTransaction();
+        List<User> users = session.createSQLQuery("SELECT * FROM users").list();
+        //session.getTransaction().commit();
+        session.close();
+        return users;
     }
 
     @Override
@@ -73,4 +79,9 @@ public class UserDaoHibernateImpl implements UserDao {
         session.getTransaction().commit();
         session.close();
     }
+
+    public void disconnect (){
+        sessionFactory.close();
+    }
+
 }
