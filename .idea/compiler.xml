@@ -6,13 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="spring-hibernate" />
+        <module name="2.2.2" />
         <module name="PreProject" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="spring-beans" target="1.8" />
       <module name="spring-helloworld" target="1.8" />
+      <module name="spring-hibernate" target="1.8" />
       <module name="spring-types-of-wiring" target="1.8" />
       <module name="TaskHibernate" target="8" />
       <module name="TaskJDBC" target="7" />
