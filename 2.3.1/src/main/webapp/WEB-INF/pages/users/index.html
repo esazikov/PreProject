@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+
+<form method="post" action="/users">
+    <label for="name">Name</label>
+    <input name="name" type="text" id="name">
+    <br/>
+
+    <label for="lastname">LastName</label>
+    <input name="lastName" type="text" id="lastname">
+    <br/>
+
+    <label for="age">Age</label>
+    <input name="age" type="number" id="age">
+    <br/>
+
+    <input type="submit" value="Add User">
+</form>
+<br>
+<div th:each="user : ${users}">
+    <a th:href="@{/users/{id}(id=${user.getId()})}"th:text="${user.toString()}">user</a>
+</div>
+
+</body>
+</html>
