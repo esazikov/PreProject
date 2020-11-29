@@ -2,7 +2,7 @@
 /shelf/
 /workspace.xml
 # Datasource local storage ignored files
-/../../../../:\Mentor\PreProject-Spring-CRUD\.idea/dataSources/
+/../../../../../:\Learning\JavaMentor\PreProject\.idea/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/

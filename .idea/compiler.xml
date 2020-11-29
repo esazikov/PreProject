@@ -6,22 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="3.1.1" />
+        <module name="SpringBoot" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="2.2.2" target="1.8" />
-      <module name="spring-beans" target="1.8" />
-      <module name="spring-helloworld" target="1.8" />
-      <module name="spring-hibernate" target="1.8" />
-      <module name="spring-types-of-wiring" target="1.8" />
-      <module name="TaskHibernate" target="8" />
-      <module name="TaskJDBC" target="7" />
+      <module name="SpringBoot" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="3.1.1" options="-parameters" />
+      <module name="SpringBoot" options="-parameters" />
     </option>
   </component>
 </project>
